@@ -1,0 +1,2 @@
+https://usr:pas@github.com----https://usr:token@github.com
+配置git提交的用户名与邮箱，设成跟github的用户名与邮箱一样，推送到github显示的提交者就是你自己

@@ -1,0 +1,19 @@
+git clone [URL]
+先把代码clone下来
+
+git reset --soft HEAD~1		切换到之前1次的提交，也可以是2等等..
+或
+git reset --soft HEAD^		切换到之前1次的提交
+执行上面其中一行，当前最新的代码还会保留
+
+git push --force origin master
+强制推送到服务器，此时服务器的最新提交，会与上一步切换的一样
+
+
+git commit -am"最新的代码"
+将最新的代码提交到本地
+
+git push origin master	
+正常推送到服务器	完成
+
+
