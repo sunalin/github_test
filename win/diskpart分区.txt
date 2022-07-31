@@ -1,0 +1,34 @@
+1、利用diskpart创建efi和msr分区
+
+diskpart
+
+list disk          //列出所有磁盘
+
+sel disk 0         //选择磁盘0
+
+create partition efi size=200	//创建efi分区，大小为200mb
+
+create partition msr size=128	//创建msr分区，大小为128mb
+
+list part     //列出所选磁盘的所有分区
+
+用DG把efi分区格式化成 fat16/fat32 格式，然后就可以添加windows引导文件,并设置好bois（关闭第一启动盘，打开efi开关）
+
+
+2（可忽略）、为efi分区分配盘符（只是为了方便手动添加引导）
+
+diskpart
+
+list disk          //列出所有磁盘
+
+sel disk 0         //选择磁盘0
+
+list part    	   //列出所选磁盘的所有分区
+
+sel part 1         //选择分区1
+
+assign letter=f    //为分区1分配盘符f
+
+这时已在可以在我的电脑里看到f盘了，如果没有请输命令
+
+explorer f:\	   //这样就打开了f盘

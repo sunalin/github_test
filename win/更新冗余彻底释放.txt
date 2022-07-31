@@ -1,0 +1,25 @@
+运行dism /online /Cleanup-Image /StartComponentCleanup /ResetBase之前，请停止Windows Search服务，再运行就OK啦。
+
+通过Unlocker工具查看C:\Windows\System32\korwbrkr.dll发现其被Windows Search服务进程锁定，推荐运行dism前停止Windows Search服务。
+
+
+1、在打开的命令提示符中输入安全清理命令：
+Dism.exe /online /Cleanup-Image /StartComponentCleanup
+//该命令支持早期版本的更新组件（支持Win8.1 RTM、Win8.1 Update平台）
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
+//注意：完成此命令后，将无法卸载已安装更新，不会影响后续更新的安装和卸载（不支持Win8.1 Update平台，谨慎操作）
+经测试重装在update版本后者无法使用！不过可能是微软故意为之吧！因为后者运行后补丁将无法卸载！故大家还是用前者吧！
+
+2、等待片刻后，我们再次输入WinSxS文件夹查询命令：
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
+//查询当前WinSxS文件夹实际大小
+
+3、使用这个命令清理操作系统，可总是失败
+DISM.exe /Online/Cleanup-Image /StartComponentCleanup /ResetBase 
+解决方法：
+korwbrkr.lex 文件被锁定导致dism失败
+搜索这个文件，这个文件被SearchIndexer.exe锁定，把此进程结束，然后删 korwbrkr.lex
+
+4、Win8系统文件损坏，无法自动修复的解决方法：管理员运行如下命令等待即可：
+DISM.exe /Online /Cleanup-image /Scanhealth
+DISM.exe /Online /Cleanup-image /Restorehealth
